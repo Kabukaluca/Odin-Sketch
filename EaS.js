@@ -2,6 +2,10 @@ const sketchCont = document.getElementById("sketch-container");
 const input = document.querySelector("#slider");
 const gridSizeSpan = document.querySelector(".gridSize");
 const clear = document.querySelector("#clearBtn")
+const eraser = document.querySelector("#eraserBtn");
+const blackPen  = document.querySelector("#blackBtn");
+const rainbow = document.querySelector("#rainbowBtn");
+var color = "black";
 let isDrawing = false;
 
 
@@ -19,7 +23,7 @@ function createDivs() {
         divCol.appendChild(divRow);
 
         divRow.addEventListener("click", () => {
-          divRow.style.backgroundColor = "black";
+          divRow.style.backgroundColor = color;
         });
     }
   sketchCont.appendChild(divCol);
@@ -30,8 +34,12 @@ function createDivs() {
 function handleDrawing (event) {
   if (isDrawing) {
     const divRow = event.target;
-    divRow.style.backgroundColor = "black";
-  };
+    if (color === "rainbow") {
+      divRow.style.backgroundColor = getRdmColor();
+    } else {
+    divRow.style.backgroundColor = color;
+    }
+  }
 };
 
 
@@ -56,3 +64,20 @@ input.addEventListener("input", () => {
 input.addEventListener("input", createDivs);
 
 clear.addEventListener("click", createDivs);
+
+eraser.addEventListener("click", () => {
+  color = "white";
+});
+
+blackBtn.addEventListener("click", () => {
+  color = "black";
+});
+
+rainbow.addEventListener("click", () => {
+  color = "rainbow";
+});
+
+// Functions for DOM functions
+function getRdmColor() {
+    return "hsla(" + (Math.random() * 360) + ", 100%, 50%, 1)";
+}; 
