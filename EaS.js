@@ -1,17 +1,23 @@
 const sketchCont = document.getElementById("sketch-container");
-const input = document.querySelector("#slider");
+const gridInput = document.querySelector("#slider");
 const gridSizeSpan = document.querySelector(".gridSize");
 const clear = document.querySelector("#clearBtn")
 const eraser = document.querySelector("#eraserBtn");
-const blackPen  = document.querySelector("#blackBtn");
+const colorBtn = document.querySelector("#colorBtn");
+const colorPick = document.querySelector("#colorPick");
 const rainbow = document.querySelector("#rainbowBtn");
-var color = "black";
+var color = colorPick.value;
 let isDrawing = false;
+
+
+// Set initial grid size
+gridInput.value = 50;
+gridSizeSpan.textContent = `${gridInput.value} x ${gridInput.value}`;
 
 
 // create divs
 function createDivs() {
-  let gridSize = input.value;
+  let gridSize = gridInput.value;
   sketchCont.innerHTML = "";
   for (let i = 0; i < gridSize; i++) {
     let divCol = document.createElement("div");
@@ -30,16 +36,19 @@ function createDivs() {
     }
 };
 
+
 //Handle drawing event
 function handleDrawing (event) {
   if (isDrawing) {
     const divRow = event.target;
-    if (color === "rainbow") {
-      divRow.style.backgroundColor = getRdmColor();
-    } else {
-    divRow.style.backgroundColor = color;
+    if (divRow !== sketchCont) {
+      if (color === "rainbow") {
+        divRow.style.backgroundColor = getRdmColor();
+      } else {
+      divRow.style.backgroundColor = color;
+      }
     }
-  }
+  } 
 };
 
 
@@ -58,10 +67,10 @@ createDivs();
 
 
 // DOM functions
-input.addEventListener("input", () => {
-    gridSizeSpan.textContent = input.value + " x " + input.value;
+gridInput.addEventListener("input", () => {
+    gridSizeSpan.textContent = gridInput.value + " x " + gridInput.value;
 });
-input.addEventListener("input", createDivs);
+gridInput.addEventListener("input", createDivs);
 
 clear.addEventListener("click", createDivs);
 
@@ -69,13 +78,18 @@ eraser.addEventListener("click", () => {
   color = "white";
 });
 
-blackBtn.addEventListener("click", () => {
-  color = "black";
+colorBtn.addEventListener("click", () => {
+  color = colorPick.value;
+});
+
+colorPick.addEventListener("input", () => {
+  color = colorPick.value;
 });
 
 rainbow.addEventListener("click", () => {
   color = "rainbow";
 });
+
 
 // Functions for DOM functions
 function getRdmColor() {
