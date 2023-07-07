@@ -6,6 +6,8 @@ const eraser = document.querySelector("#eraserBtn");
 const colorBtn = document.querySelector("#colorBtn");
 const colorPick = document.querySelector("#colorPick");
 const rainbow = document.querySelector("#rainbowBtn");
+const btnsActiveList = document.querySelectorAll(".btns");
+let activeBtn = null;
 var color = colorPick.value;
 let isDrawing = false;
 
@@ -89,6 +91,18 @@ colorPick.addEventListener("input", () => {
 rainbow.addEventListener("click", () => {
   color = "rainbow";
 });
+
+
+btnsActiveList.forEach(btn => {
+  btn.addEventListener("click", () => {
+    if(activeBtn) {
+      activeBtn.classList.remove("active");
+    };
+    activeBtn = btn;
+    btn.classList.add("active");
+  });
+});
+
 
 
 // Functions for DOM functions
