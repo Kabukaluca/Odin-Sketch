@@ -11,7 +11,7 @@ let isDrawing = false;
 
 
 // Set initial grid size
-gridInput.value = 50;
+gridInput.value = 32;
 gridSizeSpan.textContent = `${gridInput.value} x ${gridInput.value}`;
 
 
