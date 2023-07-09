@@ -7,6 +7,7 @@ const colorBtn = document.querySelector("#colorBtn");
 const colorPick = document.querySelector("#colorPick");
 const rainbow = document.querySelector("#rainbowBtn");
 const btnsActiveList = document.querySelectorAll(".btns");
+// const header = document.querySelector("#header");
 let activeBtn = null;
 var color = colorPick.value;
 let isDrawing = false;
@@ -86,26 +87,36 @@ colorBtn.addEventListener("click", () => {
 
 colorPick.addEventListener("input", () => {
   color = colorPick.value;
+   /* header.style.textShadow = `
+  0 0 3px ${color},
+  0 0 7px ${color},
+  0 0 21px ${color},
+  0 0 25px ${color},
+  0 0 29px ${color},
+  0 0 33px ${color},
+  0 0 37px ${color},
+  0 0 41px ${color},
+  0 0 45px ${color}`; */
 });
 
 rainbow.addEventListener("click", () => {
   color = "rainbow";
 });
 
-
 btnsActiveList.forEach(btn => {
   btn.addEventListener("click", () => {
-    if(activeBtn) {
-      activeBtn.classList.remove("active");
-    };
-    activeBtn = btn;
-    btn.classList.add("active");
-  });
+   btnsActiveList.forEach(otherBtn => {
+    otherBtn.classList.remove("active");
+    otherBtn.style.borderColor = "white";
+    otherBtn.style.boxShadow = "none";
+   });
+   btn.classList.add("active");
+   btn.style.borderColor = colorPick.value;
+   btn.style.boxShadow = `0 0 20px ${colorPick.value}`;
 });
-
-
+});
 
 // Functions for DOM functions
 function getRdmColor() {
     return "hsla(" + (Math.random() * 360) + ", 100%, 50%, 1)";
-}; 
+};
