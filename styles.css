@@ -10,7 +10,10 @@ html, body {
     align-items: center;
     justify-content: center;
     background-color: #ededed;
-   background-image: url("images/darkBlueWall.jpeg");
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.7), 
+        rgba(0, 0, 0, 0.7)
+      ), url("images/pixelSierra.jpeg");
     background-repeat: no-repeat;
     background-size:cover; }
 
@@ -31,6 +34,11 @@ html, body {
     letter-spacing: 6px;
     margin-top: -10px;
     color: white;
+    animation: pulsate 0.11s ease-in-out infinite alternate; 
+}
+
+@keyframes pulsate {
+    100% {
     text-shadow:    0 0 3px #fff,
                     0 0 7px #fff,
                     0 0 21px #ff00d0,
@@ -40,7 +48,19 @@ html, body {
                     0 0 37px #FF00D0,
                     0 0 41px #FF00D0,
                     0 0 45px #FF00D0;
-                }   
+    }
+    0% {
+        text-shadow:    0 0 3px #fff,
+                        0 0 6px #fff,
+                        0 0 19px #ff00d0,
+                        0 0 23px #FF00D0,
+                        0 0 27px #FF00D0,
+                        0 0 30px #FF00D0,
+                        0 0 35px #FF00D0,
+                        0 0 39px #FF00D0,
+                        0 0 43px #FF00D0;  
+    }
+}
 
 #menu {
     display: flex;  
@@ -69,12 +89,17 @@ html, body {
     cursor: pointer;
 }
 
+input[type="range"] {
+    filter: hue-rotate(90deg);
+  }
+
 #colorPick {
     width: 100px;
     height: 100px;
     border: none;
     color: transparent;
     background-color: transparent;
+    cursor: pointer;
 }
 
 #colorPick::-webkit-color-swatch {
@@ -136,6 +161,42 @@ html, body {
     align-items: center;
     height: 100%;
     width: 200px;
+}
+
+#footer {
+    font-family: 'Tilt Neon', cursive;
+    position: fixed;
+    letter-spacing: 6px;
+    left: 0;
+    bottom: 20px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    animation: pulsate2 0.11s ease-in-out infinite alternate; 
+}
+
+@keyframes pulsate2 {
+    100% {
+        text-shadow:0 0 1px #fff,
+        0 0 3px #fff,
+        0 0 7px #0095ff,
+        0 0 11px #0095ff,
+        0 0 15px #0095ff,
+        0 0 20px #0095ff,
+        0 0 24px #0095ff,
+        0 0 28px #0095ff;
+    }
+    0% {
+        text-shadow:0 0 1px #fff,
+        0 0 3px #fff,
+        0 0 6px #0095ff,
+        0 0 10px #0095ff,
+        0 0 13px #0095ff,
+        0 0 17px #0095ff,
+        0 0 21px #0095ff,
+        0 0 25px #0095ff;
+    }
 }
 
 .divCol {

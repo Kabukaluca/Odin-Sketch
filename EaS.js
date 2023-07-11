@@ -18,7 +18,7 @@ gridInput.value = 32;
 gridSizeSpan.textContent = `${gridInput.value} x ${gridInput.value}`;
 
 
-// create divs
+// Create divs
 function createDivs() {
   let gridSize = gridInput.value;
   sketchCont.innerHTML = "";
@@ -40,7 +40,7 @@ function createDivs() {
 };
 
 
-//Handle drawing event
+// Handle drawing event
 function handleDrawing (event) {
   if (isDrawing) {
     const divRow = event.target;
@@ -55,7 +55,7 @@ function handleDrawing (event) {
 };
 
 
-//Eventlisteners for Drawing
+// Eventlisteners for Drawing
 sketchCont.addEventListener("mousedown", () => {
   isDrawing = true;
 });
@@ -64,7 +64,7 @@ sketchCont.addEventListener("mouseup", () => {
   isDrawing = false;
 });
 
-sketchCont.addEventListener("mousemove", handleDrawing);
+sketchCont.addEventListener("mouseover", handleDrawing);
 
 createDivs();
 
@@ -87,16 +87,7 @@ colorBtn.addEventListener("click", () => {
 
 colorPick.addEventListener("input", () => {
   color = colorPick.value;
-   /* header.style.textShadow = `
-  0 0 3px ${color},
-  0 0 7px ${color},
-  0 0 21px ${color},
-  0 0 25px ${color},
-  0 0 29px ${color},
-  0 0 33px ${color},
-  0 0 37px ${color},
-  0 0 41px ${color},
-  0 0 45px ${color}`; */
+  updateActiveButtonBorderColor();
 });
 
 rainbow.addEventListener("click", () => {
@@ -113,10 +104,25 @@ btnsActiveList.forEach(btn => {
    btn.classList.add("active");
    btn.style.borderColor = colorPick.value;
    btn.style.boxShadow = `0 0 20px ${colorPick.value}`;
+  });
 });
-});
+
 
 // Functions for DOM functions
 function getRdmColor() {
     return "hsla(" + (Math.random() * 360) + ", 100%, 50%, 1)";
 };
+
+function updateActiveButtonBorderColor() {
+  const activeButton = document.querySelector(".btns.active");
+  if (activeButton) {
+    activeButton.style.borderColor = colorPick.value;
+    activeButton.style.boxShadow = `0 0 20px ${colorPick.value}`;
+  }
+};
+
+
+// DOM on Load
+colorBtn.classList.add("active");
+colorBtn.style.borderColor = colorPick.value;
+colorBtn.style.boxShadow = `0 0 20px ${colorPick.value}`;
